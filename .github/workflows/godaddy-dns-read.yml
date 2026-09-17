@@ -1,0 +1,35 @@
+name: GoDaddy DNS Diagnostic
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dns:
+    name: Read GoDaddy DNS records
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate API settings
+        shell: bash
+        env:
+          GODADDY_PAT: ${{ secrets.GODADDY_PAT }}
+          GODADDY_DOMAIN: ${{ vars.GODADDY_DOMAIN }}
+        run: |
+          set -euo pipefail
+          test -n "$GODADDY_PAT" || { echo "Missing GODADDY_PAT"; exit 1; }
+          test -n "$GODADDY_DOMAIN" || { echo "Missing GODADDY_DOMAIN variable"; exit 1; }
+
+      - name: List DNS records
+        shell: bash
+        env:
+          GODADDY_PAT: ${{ secrets.GODADDY_PAT }}
+          GODADDY_DOMAIN: ${{ vars.GODADDY_DOMAIN }}
+        run: |
+          set -euo pipefail
+          python3 scripts/godaddy_dns_read.py "$GODADDY_DOMAIN"

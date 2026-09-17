@@ -1,0 +1,33 @@
+{
+  "notice": "Template configuration only. Have counsel validate real jurisdiction rules before production use.",
+  "policies": {
+    "default": {
+      "label": "Default catalog",
+      "allow_age_bands": [
+        "u13",
+        "13",
+        "17"
+      ],
+      "notes": "General catalog excluding adult-only titles by default."
+    },
+    "strict": {
+      "label": "Strict content policy",
+      "allow_age_bands": [
+        "u13",
+        "13",
+        "17"
+      ],
+      "notes": "Stricter storefront profile for jurisdictions or partners with tighter rules."
+    },
+    "adult": {
+      "label": "Adult-enabled policy",
+      "allow_age_bands": [
+        "u13",
+        "13",
+        "17",
+        "18"
+      ],
+      "notes": "Requires independent age-gating and still does not override legal/platform restrictions."
+    }
+  }
+}

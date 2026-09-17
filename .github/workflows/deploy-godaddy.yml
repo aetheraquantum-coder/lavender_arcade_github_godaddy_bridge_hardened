@@ -1,0 +1,91 @@
+name: Deploy Lavender Arcade to GoDaddy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "site/**"
+      - ".github/workflows/deploy-godaddy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: godaddy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Upload site to GoDaddy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate site
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f site/index.html
+          echo "site/index.html found"
+          find site -type f | wc -l
+
+      - name: Validate required secrets
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.GODADDY_FTP_HOST }}
+          FTP_USER: ${{ secrets.GODADDY_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.GODADDY_FTP_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$FTP_HOST" || { echo "Missing GODADDY_FTP_HOST"; exit 1; }
+          test -n "$FTP_USER" || { echo "Missing GODADDY_FTP_USER"; exit 1; }
+          test -n "$FTP_PASSWORD" || { echo "Missing GODADDY_FTP_PASSWORD"; exit 1; }
+
+      - name: Install lftp
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Deploy over FTPS
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.GODADDY_FTP_HOST }}
+          FTP_USER: ${{ secrets.GODADDY_FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.GODADDY_FTP_PASSWORD }}
+          REMOTE_DIR: ${{ vars.GODADDY_REMOTE_DIR }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${REMOTE_DIR:-}" ]; then
+            REMOTE_DIR="public_html"
+          fi
+
+          cat > /tmp/lftp.cmd <<'EOF'
+          set cmd:fail-exit yes
+          set net:max-retries 2
+          set net:timeout 20
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate yes
+          open -u "$FTP_USER","$FTP_PASSWORD" "$FTP_HOST"
+          cd "$REMOTE_DIR"
+          mirror --reverse --delete --verbose=1 --parallel=2             --exclude-glob ".git*"             --exclude-glob "README*"             site/ .
+          bye
+          EOF
+
+          # Expand only the shell variables we intentionally provide to lftp.
+          sed             -e "s|\$FTP_USER|${FTP_USER//|/\\|}|g"             -e "s|\$FTP_PASSWORD|${FTP_PASSWORD//|/\\|}|g"             -e "s|\$FTP_HOST|${FTP_HOST//|/\\|}|g"             -e "s|\$REMOTE_DIR|${REMOTE_DIR//|/\\|}|g"             /tmp/lftp.cmd > /tmp/lftp.expanded.cmd
+
+          # Do not print the expanded command because it contains credentials.
+          lftp -f /tmp/lftp.expanded.cmd
+          rm -f /tmp/lftp.cmd /tmp/lftp.expanded.cmd
+
+      - name: Deployment complete
+        shell: bash
+        run: echo "Lavender Arcade deployment finished."

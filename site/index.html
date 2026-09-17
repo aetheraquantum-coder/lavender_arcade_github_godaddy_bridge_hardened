@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lavender Arcade Games — original browser, controller, learning, fantasy, survival, space, and homebrew-friendly games.">
+  <title>Lavender Arcade Games</title>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <noscript><style>.js-only{display:none!important}.nojs-note{display:block!important}</style></noscript>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-row">
+    <div>
+      <p class="eyebrow">Browser • Controller • Tor-ready • Homebrew-friendly</p>
+      <h1>Lavender Arcade Games</h1>
+      <p class="lede">Original games for kids, teens, adults, language learners, fantasy fans, survival players, and space explorers.</p>
+    </div>
+    <nav class="topnav" aria-label="Primary navigation">
+      <a href="#games">Games</a>
+      <a href="#publish">Publish</a>
+      <a href="policy/content-policy.html">Policy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="notice nojs-note" style="display:none">
+    JavaScript is disabled. You can still browse the full catalog, but interactive filtering is unavailable.
+  </section>
+
+  <section class="feature-strip" aria-label="Site features">
+    <span>No trackers</span>
+    <span>Age-filtered catalog</span>
+    <span>Controller labels</span>
+    <span>Homebrew/emulator labels</span>
+    <span>Jurisdiction policy hook</span>
+  </section>
+
+  <section class="panel js-only" aria-labelledby="filters-title">
+    <h2 id="filters-title">Choose your catalog</h2>
+    <div class="filters">
+      <label>
+        <span>Age</span>
+        <select id="ageFilter">
+          <option value="all">Show all</option>
+          <option value="u13">Under 13</option>
+          <option value="13">13–16</option>
+          <option value="17">17+</option>
+          <option value="18">18+</option>
+        </select>
+      </label>
+      <label>
+        <span>Play style</span>
+        <select id="modeFilter">
+          <option value="all">All</option>
+          <option value="browser">Browser</option>
+          <option value="controller">Controller</option>
+          <option value="homebrew">Homebrew / emulator</option>
+          <option value="learning">Learning</option>
+        </select>
+      </label>
+      <label>
+        <span>Policy region</span>
+        <select id="regionFilter">
+          <option value="default">Default catalog</option>
+          <option value="strict">Strict content policy</option>
+          <option value="adult">Adult-enabled policy</option>
+        </select>
+      </label>
+      <label>
+        <span>Search</span>
+        <input id="searchFilter" type="search" placeholder="Search game titles">
+      </label>
+    </div>
+    <p class="small">This demo uses configurable catalog rules, not automatic legal determinations. Keep the jurisdiction rules file current before using it for real distribution decisions.</p>
+  </section>
+
+  <section id="games" class="catalog" aria-labelledby="games-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Launch catalog</p>
+        <h2 id="games-title">Game concepts</h2>
+      </div>
+      <p id="countMessage" class="small js-only" aria-live="polite"></p>
+    </div>
+
+    <article class="game-card" data-age="u13" data-mode="browser homebrew learning" data-policy="default strict adult">
+      <div class="rating">Kids / Everyone</div>
+      <h3>Pixel Familiar</h3>
+      <p>Raise a tiny magical pixel companion through exploration, puzzles, and kindness-based choices.</p>
+      <div class="tags"><span>Browser</span><span>Homebrew</span><span>No combat</span></div>
+    </article>
+
+    <article class="game-card" data-age="u13" data-mode="browser controller learning" data-policy="default strict adult">
+      <div class="rating">Kids / Everyone</div>
+      <h3>Rune Circuit Junior</h3>
+      <p>Rotate enchanted tiles to reconnect magical pathways. Designed for keyboard, touch, and controllers.</p>
+      <div class="tags"><span>Controller</span><span>Puzzle</span><span>Family</span></div>
+    </article>
+
+    <article class="game-card" data-age="u13" data-mode="browser learning" data-policy="default strict adult">
+      <div class="rating">Kids / Learning</div>
+      <h3>Polyglot Quest</h3>
+      <p>Translation adventures using English, Spanish, French, German, Italian, Portuguese, Greek, Russian, Hebrew, and expandable language packs.</p>
+      <div class="tags"><span>Language</span><span>Learning</span><span>Browser</span></div>
+    </article>
+
+    <article class="game-card" data-age="13" data-mode="browser controller" data-policy="default strict adult">
+      <div class="rating">Teen</div>
+      <h3>Manafall</h3>
+      <p>Explore elven kingdoms, mana schools, spellcraft, alliances, quests, and magical ruins.</p>
+      <div class="tags"><span>Fantasy RPG</span><span>Controller</span><span>Co-op concept</span></div>
+    </article>
+
+    <article class="game-card" data-age="13" data-mode="browser controller learning" data-policy="default strict adult">
+      <div class="rating">Teen</div>
+      <h3>Campus Cipher</h3>
+      <p>Balance college classes, campus life, games, and fictional intelligence missions while learning languages, communication, technology, and psychology concepts.</p>
+      <div class="tags"><span>Strategy RPG</span><span>Learning</span><span>Controller</span></div>
+    </article>
+
+    <article class="game-card" data-age="17" data-mode="browser controller" data-policy="default strict adult">
+      <div class="rating">17+</div>
+      <h3>Interstellar: First Vector</h3>
+      <p>Explore star systems, repair your ship, trade resources, negotiate alliances, and fight third-person battles.</p>
+      <div class="tags"><span>Space RPG</span><span>Third-person</span><span>Trading</span></div>
+    </article>
+
+    <article class="game-card" data-age="17" data-mode="browser controller" data-policy="default strict adult">
+      <div class="rating">17+</div>
+      <h3>Interstellar: Border Wars</h3>
+      <p>Fleet politics, salvage, faction diplomacy, tactical ground combat, and shifting interplanetary trade routes.</p>
+      <div class="tags"><span>Space combat</span><span>Controller</span><span>Strategy</span></div>
+    </article>
+
+    <article class="game-card" data-age="17" data-mode="browser controller" data-policy="default strict adult">
+      <div class="rating">17+</div>
+      <h3>Outbreak Alliances</h3>
+      <p>Survive a fictional zombie outbreak alone or through competing alliances while managing shelter, supplies, rescues, and disease-control decisions.</p>
+      <div class="tags"><span>Survival</span><span>Alliances</span><span>Controller</span></div>
+    </article>
+
+    <article class="game-card" data-age="18" data-mode="browser controller" data-policy="adult">
+      <div class="rating">18+</div>
+      <h3>Pandemic of the Absurd</h3>
+      <p>A satirical fictional outbreak strategy series where factions may use conventional response teams, military intervention, or fictional spiritual-energy mechanics. Spiritual systems are fantasy mechanics, not medical claims.</p>
+      <div class="tags"><span>Satire</span><span>Strategy</span><span>Mature</span></div>
+    </article>
+
+    <article class="game-card" data-age="18" data-mode="browser controller" data-policy="adult">
+      <div class="rating">18+</div>
+      <h3>Afterfall</h3>
+      <p>A darker zombie survival campaign built around faction diplomacy, base management, rescue operations, and solo or alliance play.</p>
+      <div class="tags"><span>Mature survival</span><span>Controller</span><span>Strategy</span></div>
+    </article>
+
+    <article class="game-card" data-age="13" data-mode="browser homebrew controller" data-policy="default strict adult">
+      <div class="rating">Teen</div>
+      <h3>Rune Circuit</h3>
+      <p>A controller-friendly puzzle game designed to be portable to browser and original homebrew builds for supported emulator environments.</p>
+      <div class="tags"><span>Homebrew</span><span>Controller</span><span>Puzzle</span></div>
+    </article>
+
+    <article class="game-card" data-age="13" data-mode="browser controller" data-policy="default strict adult">
+      <div class="rating">Teen</div>
+      <h3>Digital Twin</h3>
+      <p>Control two mirrored characters in different versions of the same world and keep their actions synchronized.</p>
+      <div class="tags"><span>Controller</span><span>Action puzzle</span><span>Co-op concept</span></div>
+    </article>
+  </section>
+
+  <section id="publish" class="panel">
+    <p class="eyebrow">Creator program</p>
+    <h2>Publish your own game</h2>
+    <p>Creators can submit original games, authorized ports, public-domain titles, and lawful homebrew packages. The live production version should quarantine and scan every upload before publication.</p>
+    <div class="two-col">
+      <div>
+        <h3>Allowed</h3>
+        <ul>
+          <li>Original games and artwork</li>
+          <li>Lawful homebrew builds</li>
+          <li>Authorized ports</li>
+          <li>Public-domain content</li>
+          <li>Age-rated mature content that passes platform policy</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Not accepted</h3>
+        <ul>
+          <li>Stolen or unauthorized commercial ROMs</li>
+          <li>Games whose distribution creates clear legal liability</li>
+          <li>Content blocked by the active platform policy or jurisdiction rule set</li>
+          <li>Uploads containing malware or hidden trackers</li>
+        </ul>
+      </div>
+    </div>
+    <p><a class="button" href="creator/submission-guide.html">Read creator submission guide</a></p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <span>Lavender Arcade Games</span>
+    <span><a href="policy/content-policy.html">Content policy</a> · <a href="policy/privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

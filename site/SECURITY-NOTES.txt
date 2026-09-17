@@ -1,0 +1,12 @@
+Lavender Arcade HTTP/HTTPS compatibility notes
+
+- The site does not require service workers, WebAuthn, geolocation, clipboard,
+  camera, microphone, WebUSB, WebBluetooth, or other secure-context-only APIs.
+- Static browsing and game catalog filtering work on HTTP.
+- Security headers that remain meaningful on HTTP are enabled in .htaccess.
+- HSTS is emitted only when HTTPS is active.
+- No third-party scripts, analytics, fonts, or CDNs are required.
+- Do not put login credentials, payment data, age-verification secrets, or
+  creator-upload processing on plain HTTP.
+- Accounts, payments, authenticated creator uploads, and sensitive APIs should
+  require HTTPS even though the public static catalog can degrade to HTTP.
